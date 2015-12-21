@@ -10,8 +10,8 @@ app.set('port', config.port || 9999);
 app.get('*', function(req, res) {
 
 	res.header('Access-Control-Allow-Origin', '*');
-	var width = 500;
-	var height = 500;
+	var width = 0;
+	var height = 0;
 
 	// หาขนาดรูปที่ต้องการ เช่น /500x500/category/bag/1.jpg
 	var sp = req.url.split('/');
@@ -51,9 +51,9 @@ app.get('*', function(req, res) {
 					}
 				}
 				
-				img.draw(['image Over '+(value.width-box)+','+(value.height-box)+' '+box+','+box+' '+config.imageLogoPath])
-					.resize(width, height)
-					.comment('RemaxThailand')
+				img.draw(['image Over '+(value.width-box)+','+(value.height-box)+' '+box+','+box+' '+config.imageLogoPath]);
+				if (width != 0) img.resize(width, height);
+				img.comment('RemaxThailand')
 					.compress('Lossless')
 					.stream(function streamOut (error, stdout, stderr) {
 						if (!error) {
