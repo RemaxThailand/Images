@@ -46,12 +46,12 @@ app.get('*', function(req, res) {
 
 			fs.exists(resizeName, function (exists) {
 				if (exists){
-					console.log('use '+ resizeName);
+					//console.log('use '+ resizeName);
 					var stream = fs.createReadStream(resizeName);
 					stream.pipe(res);
 				}
 				else {
-					console.log('generate '+ resizeName);
+					//console.log('generate '+ resizeName);
 
 					var gm = require('gm');
 					var img = gm(name);
@@ -101,7 +101,7 @@ app.get('*', function(req, res) {
 			});
 		}
 		else {
-			console.log('no image');
+			//console.log('no image');
 			var stream = fs.createReadStream(config.imageLogoPath);
 			stream.pipe(res);
 		}
